@@ -77,14 +77,15 @@ void printESPInfo() {
 void setup() {
   Serial.begin(115200);
   // WS2818 is compatible with WS2811 but uses GRB
-  CFastLED::addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setBrightness(32);
 
   delay(1000);
   printESPInfo();
+  
+}
 
-  // Going to loop function crashes the CPU
-  // Instead use an infinite loop in setup
+void loop() {
   while (true) {
     leds[0] = CRGB::Red;
     FastLED.delay(500);
@@ -96,5 +97,3 @@ void setup() {
     FastLED.delay(500);
   }
 }
-
-void loop() {}
